@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">V-JetGroupTestApp</string>
+    <string name="frag_articles_title">Articles</string>
+    <string name="frag_favorite_articles_title">Favorites</string>
+    <string name="error_message">Failed loading articles</string>
+    <string name="text_sort_by">Sorting by</string>
+    <string name="text_date_from">Date from</string>
+    <string name="text_date_to">Date to</string>
+    <string name="text_select">select</string>
+    <string name="text_share_facebook">Share Facebook</string>
+    <string name="action_favorite">Favorites</string>
+    <string name="action_facebook">Invite by Facebook</string>
+    <string name="text_delete">delete</string>
+
+    <string-array name="spinner_data_sort_by">
+        <item>Relevancy</item>
+        <item>Popularity</item>
+    </string-array>
+
+    <string name="facebook_app_id">172297700277661</string>
+    <string name="dialog_text_search">Search</string>
+    <string name="dialog_text_cancel">Cancel</string>
+    <string name="search_warning">Select at least one source</string>
+
+    <string name="my_share_link">https://github.com/DenisAkimenko</string>
+    <string name="invite_string">Invite friends!</string>
+</resources>
