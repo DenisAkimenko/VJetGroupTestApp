@@ -56,10 +56,7 @@ public class ArticlesPresenter implements ArticlesContract.Presenter {
                             mView.addArticles(mArticles);
                             mView.showProgress(false);
                         },
-                        error -> {
-                            Log.e("denisLogs", error.getMessage());
-                            mView.showProgress(false);
-                        });
+                        this::getError);
     }
 
     @SuppressLint("CheckResult")
@@ -75,10 +72,7 @@ public class ArticlesPresenter implements ArticlesContract.Presenter {
                                 mView.addArticles(mArticles);
                                 mView.showProgress(false);
                             },
-                            error -> {
-                                Log.e("denisLogs", error.getMessage());
-                                mView.showProgress(false);
-                            });
+                            this::getError);
         }
     }
 
@@ -95,15 +89,17 @@ public class ArticlesPresenter implements ArticlesContract.Presenter {
                                 mView.onSearchReady(mSources);
                                 mView.showProgress(false);
                             },
-                            error -> {
-                                Log.e("denisLogs", error.getMessage());
-                                mView.showProgress(false);
-                            });
+                            this::getError);
         }
     }
 
     @Override
     public void addToFavourites(Article article) {
         mRepository.addToFavorites(article);
+    }
+
+    private void getError(Throwable error) {
+        Log.e("denisLogs", error.getMessage());
+        mView.showProgress(false);
     }
 }
