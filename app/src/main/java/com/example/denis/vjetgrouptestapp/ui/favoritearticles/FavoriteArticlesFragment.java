@@ -20,6 +20,8 @@ import com.example.denis.vjetgrouptestapp.ui.adapters.ArticlesRecyclerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.realm.RealmResults;
+
 public class FavoriteArticlesFragment extends Fragment implements FavoriteArticlesContract.View,
         ArticlesRecyclerAdapter.ArticleItemListener {
 
@@ -95,8 +97,8 @@ public class FavoriteArticlesFragment extends Fragment implements FavoriteArticl
 
     @Override
     public void onDestroyView() {
-        super.onDestroyView();
         mPresenter.unsubscribe();
+        super.onDestroyView();
     }
 
     @Override

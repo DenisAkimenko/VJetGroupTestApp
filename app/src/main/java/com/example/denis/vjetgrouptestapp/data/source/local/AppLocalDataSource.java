@@ -23,19 +23,12 @@ public class AppLocalDataSource implements DataSource {
 
     public static AppLocalDataSource getInstance() {
         if (INSTANCE == null) {
-            INSTANCE = new AppLocalDataSource();
+            synchronized (AppLocalDataSource.class) {
+                if (INSTANCE == null)
+                    INSTANCE = new AppLocalDataSource();
+            }
         }
         return INSTANCE;
-    }
-
-    @Override
-    public Single<BaseResponse> getArticles(SearchProperties searchProperties) {
-        return Single.create(it -> {
-            Realm realm = Realm.getDefaultInstance();
-            List<Article> articles = realm.where(Article.class).findAll();
-            realm.copyFromRealm(articles);
-            realm.close();
-        });
     }
 
     @Override
@@ -51,7 +44,8 @@ public class AppLocalDataSource implements DataSource {
     public void removeFromFavorites(Article article) {
         try (Realm realm = Realm.getDefaultInstance()) {
             realm.executeTransaction(realm1 -> realm.where(Article.class)
-                    .equalTo("url",article.getUrl()).findFirst().deleteFromRealm());
+                    .equalTo("url",article.getUrl())
+                    .findFirst().deleteFromRealm());
         } catch (IllegalArgumentException | RealmMigrationNeededException | NullPointerException e) {
             Log.e("Error", e.getMessage());
         }
@@ -74,6 +68,11 @@ public class AppLocalDataSource implements DataSource {
 
     @Override
     public Single<BaseResponse> getSources() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Single<BaseResponse> getArticles(SearchProperties searchProperties) {
         throw new UnsupportedOperationException();
     }
 }

@@ -6,6 +6,8 @@ import com.example.denis.vjetgrouptestapp.data.model.Article;
 
 import java.util.List;
 
+import io.realm.RealmResults;
+
 public interface FavoriteArticlesContract {
 
     interface View extends BaseView<Presenter> {

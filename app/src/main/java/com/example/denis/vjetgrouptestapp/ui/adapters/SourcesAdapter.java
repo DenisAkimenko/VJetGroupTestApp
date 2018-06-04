@@ -18,7 +18,7 @@ import static com.example.denis.vjetgrouptestapp.data.constants.ApiConstants.MAX
 
 public class SourcesAdapter extends RecyclerView.Adapter<SourcesAdapter.ViewHolder> {
 
-    private List<Source> sources = new ArrayList<>();
+    private List<Source> mSources = new ArrayList<>();
 
     @NonNull
     @Override
@@ -30,22 +30,22 @@ public class SourcesAdapter extends RecyclerView.Adapter<SourcesAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
-        Source source = sources.get(position);
+        Source source = mSources.get(position);
         holder.tvSourceName.setText(source.getName());
         holder.cbSource.setChecked(source.isSelected());
 
         View.OnClickListener listener = view -> {
-            boolean wasSelected = sources.get(position).isSelected();
+            boolean wasSelected = mSources.get(position).isSelected();
             if (wasSelected){
-                sources.get(position).setSelected(false);
+                mSources.get(position).setSelected(false);
                 notifyItemChanged(position);
             } else {
                 if (checkMaxSize()) {
-                    sources.get(position).setSelected(!sources.get(position).isSelected());
+                    mSources.get(position).setSelected(!mSources.get(position).isSelected());
                     notifyItemChanged(position);
                 }
             }
-            holder.cbSource.setChecked(sources.get(position).isSelected());
+            holder.cbSource.setChecked(mSources.get(position).isSelected());
         };
 
         holder.itemView.setOnClickListener(listener);
@@ -54,7 +54,7 @@ public class SourcesAdapter extends RecyclerView.Adapter<SourcesAdapter.ViewHold
 
     private boolean checkMaxSize() {
         int count = 0;
-        for (Source source : sources) {
+        for (Source source : mSources) {
             if (source.isSelected()) {
                 count++;
             }
@@ -63,19 +63,18 @@ public class SourcesAdapter extends RecyclerView.Adapter<SourcesAdapter.ViewHold
     }
 
     public void setSources(List<Source> sources){
-        this.sources = sources;
+        this.mSources = sources;
         notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
-        if (sources == null) return 0;
-        return sources.size();
+        return mSources.size();
     }
 
     public List<Source> getSources(){
         List<Source> filteredSources = new ArrayList<>();
-        for (Source source : sources) {
+        for (Source source : mSources) {
             if (source.isSelected()) {
                 filteredSources.add(source);
             }

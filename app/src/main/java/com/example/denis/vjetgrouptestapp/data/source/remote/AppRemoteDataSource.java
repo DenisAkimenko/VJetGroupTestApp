@@ -22,7 +22,10 @@ public class AppRemoteDataSource implements DataSource {
 
     public static AppRemoteDataSource getInstance() {
         if (INSTANCE == null) {
-            INSTANCE = new AppRemoteDataSource();
+            synchronized (AppRemoteDataSource.class) {
+                if (INSTANCE == null)
+                    INSTANCE = new AppRemoteDataSource();
+            }
         }
         return INSTANCE;
     }

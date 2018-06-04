@@ -104,14 +104,18 @@ public class ArticlesRecyclerAdapter extends RecyclerView.Adapter<ArticlesRecycl
             shareButton.setOnClickListener(v -> {
                 if (mItemListener != null) {
                     mItemListener.shareOnFacebook(mArticles.get(getAdapterPosition()));
-                    notifyDataSetChanged();
+                    notifyItemChanged(getAdapterPosition());
                 }
             });
 
             favoriteView.setOnClickListener(v -> {
                 if (mItemListener != null) {
                     mItemListener.changeFavoriteStatus(mArticles.get(getAdapterPosition()));
-                    notifyDataSetChanged();
+                    if (mIsFavorites) {
+                        notifyItemRemoved(getAdapterPosition());
+                    } else {
+                        notifyItemChanged(getAdapterPosition());
+                    }
                 }
             });
         }

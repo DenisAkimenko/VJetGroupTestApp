@@ -8,6 +8,8 @@ import com.example.denis.vjetgrouptestapp.data.source.SearchProperties;
 
 import java.util.List;
 
+import io.realm.RealmResults;
+
 public interface ArticlesContract {
 
     interface View extends BaseView<Presenter> {

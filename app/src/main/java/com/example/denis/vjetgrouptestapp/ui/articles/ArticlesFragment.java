@@ -155,8 +155,8 @@ public class ArticlesFragment extends Fragment implements ArticlesContract.View,
 
     @Override
     public void onDestroyView() {
-        super.onDestroyView();
         mPresenter.unsubscribe();
+        super.onDestroyView();
     }
 
     @Override
